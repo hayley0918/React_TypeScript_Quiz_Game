@@ -1,46 +1,84 @@
-# Getting Started with Create React App
+# React TypeScript Quiz Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Part 1. Set up the project
 
-## Available Scripts
+1. create react app
+   npx create-react-app react-quiz --template typescript
+   remove the unnecessary files
 
-In the project directory, you can run:
+2. install the dependency
+   npm i styled-components @types/styled-components
 
-### `npm start`
+3. download the image for the app and place the image file in images/src
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+4. download the font and copy the embed link and place it in index.html/public
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+5. api ( Trivia API ) to fetch the data
 
-### `npm test`
+## Part 2. Logic
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. create components folder in src
 
-### `npm run build`
+2. create QuestionCard.tsx in components folder
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. create API.ts and utils.ts in src folder
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. create startTrivia, checkAnswer, nextQuestion functions in App.tsx
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. JSX in App.tsx to display name of the app, start button, loading, QuestionCard, next question button.
 
-### `npm run eject`
+6. define type Props in QuestionCard.tsx
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- specify the Functional Component using React.FC to pass the Props down
+- destructure the properties from props
+- JSX to display the data from Props
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+7. import useState in App.tsx to manage the states
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- define the initial states of the props ( loading, questions, number, userAnswers, score, gameOver )
+- pass the props to the QuestionCard component
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+8. API.ts
 
-## Learn More
+- create fetchQuizQuestions taking 2 parameters (amount: number, Difficulty)
+- create enum Difficulty and specify the constants in it
+- define the endpoint in fetchQuizQuestions
+- declare the data using fetch(endpoint)
+- create type Question to specify the type of the properties
+- create type QuestionState to integrate incorrect answers and correct answer
+- import shuffleArray
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+9. App.tsx
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- import fetchQuizQuestions and Difficulty
+- import QuestionState
+- create type AnswerObject
+
+10. utils.ts
+
+- create shuffleArray to shuffle the answers
+
+11. App.tsx
+
+- setting the initial state of the game
+- define newQuestions containing the data from API
+- JSX
+
+- checkAnswer function
+
+1. get the answer from the user Click answer
+2. set the correct from the data
+3. compare if the user answer is same with the correct
+4. increase the score
+5. save answers in the array for user answers
+
+- nextQuestion function
+
+1. move on to the next question if not the last quesiton
+
+## Part 3. Styling
+
+- create App.styles.ts in src folder
+- import styled, { createGlobalStyle } from 'styled-components'
+- import BGImage from './images/nattu-adnan.jpg'
+- create GlobalStyle using createGlobalStyle``
